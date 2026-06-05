@@ -36,7 +36,7 @@ export default function Home() {
           onClick={handleChangeColor}
           className="w-full rounded-xl bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-700 active:scale-[0.98]"
         >
-          Змінити колір фону
+          пупупуіііііsss
         </button>
       </div>
     </main>
