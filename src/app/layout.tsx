@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Full-stack проєкт",
-  description: "Базовий Next.js проєкт з TypeScript та Tailwind CSS",
+  title: "Енциклопедія фізики",
+  description: "Довідник з основних розділів фізики",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-slate-50 font-sans text-gray-900 antialiased`}
       >
         {children}
       </body>
