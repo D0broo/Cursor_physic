@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import KinematicsEncyclopedia from "@/components/KinematicsEncyclopedia";
 import { getSectionBySlug, PHYSICS_SECTIONS } from "@/data/physics-sections";
 
 type SectionPageProps = {
@@ -29,12 +30,18 @@ export default async function SectionPage({ params }: SectionPageProps) {
         ← Назад до розділів
       </Link>
 
-      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
         {section.title}
       </h1>
-      <p className="mt-4 text-gray-600">
-        Сторінка розділу «{section.title}» — тут з&apos;явиться зміст енциклопедії.
-      </p>
+
+      {slug === "kinematics" ? (
+        <KinematicsEncyclopedia />
+      ) : (
+        <p className="text-gray-600">
+          Сторінка розділу «{section.title}» — тут з&apos;явиться зміст
+          енциклопедії.
+        </p>
+      )}
     </main>
   );
 }
