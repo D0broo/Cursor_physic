@@ -56,11 +56,11 @@ function LawsPanel() {
               <FormulaBlock latex={law.latex} />
             </div>
           )}
-          {law.imageQuery && (
+          {law.imageFile && (
             <img
-              src={`https://source.unsplash.com/featured/400x240?${encodeURIComponent(law.imageQuery)}`}
+              src={`/images/${law.imageFile}`} // <-- Використовуємо imageFile
               alt={law.title}
-              className="mt-4 h-40 w-full rounded-lg object-cover"
+              className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
             />
           )}
         </article>
