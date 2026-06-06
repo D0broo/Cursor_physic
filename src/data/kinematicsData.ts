@@ -1,4 +1,9 @@
-export type KinematicsTabId = "theory" | "graphs" | "formulas" | "examples";
+export type KinematicsTabId =
+  | "theory"
+  | "graphs"
+  | "formulas"
+  | "examples"
+  | "advanced-theory";
 
 export type KinematicsTab = {
   id: KinematicsTabId;
@@ -37,7 +42,58 @@ export const KINEMATICS_TABS: KinematicsTab[] = [
   { id: "graphs", label: "Графіки" },
   { id: "formulas", label: "Формули" },
   { id: "examples", label: "Приклади задач" },
+  { id: "advanced-theory", label: "Поглиблена теорія" },
 ];
+
+export const advancedTheory = {
+  transmissions: [
+    {
+      name: "Пасова передача",
+      desc: "v1 = v2 (ремені не розтягуються), n2 = n3 (жорстке кріплення).",
+      imageQuery: "belt drive transmission diagram physics"
+    },
+    {
+      name: "Фрикційна передача",
+      desc: "n1/n2 = r2/r1 (відношення частот обернене до радіусів).",
+      imageQuery: "friction drive transmission physics"
+    },
+    {
+      name: "Зубчаста передача",
+      desc: "r1/r2 = z1/z2, n1/n2 = z2/z1 (відношення частот через кількість зубців).",
+      imageQuery: "gear transmission ratio physics"
+    },
+    {
+      name: "Ланцюгова передача",
+      desc: "Забезпечує передачу руху без проковзування на великі відстані.",
+      imageQuery: "chain drive mechanism physics"
+    }
+  ],
+  circularMotion: {
+    title: "Нерівномірний рух по колу",
+    concepts: [
+      { 
+        name: "Повне прискорення", 
+        formula: "a = a_r + a_t", 
+        desc: "Векторна сума радіального (доцентрового) та тангенційного прискорень. Вони завжди перпендикулярні: a_r ⊥ a_t." 
+      },
+      { 
+        name: "Складові прискорення", 
+        formula: "a_r = \\omega^2 r; \\quad a_t = \\varepsilon r", 
+        desc: "Радіальне (a_r) відповідає за зміну напрямку швидкості, тангенційне (a_t) — за зміну її модуля." 
+      },
+      { 
+        name: "Кутове прискорення", 
+        formula: "\\varepsilon = \\frac{\\Delta\\omega}{\\Delta t}", 
+        desc: "Характеризує швидкість зміни кутової швидкості." 
+      },
+      { 
+        name: "Середні значення", 
+        formula: "\\omega_{сер} = \\frac{\\omega + \\omega_0}{2}; \\quad n_{сер} = \\frac{n + n_0}{2}", 
+        desc: "Використовуються при рівнозмінному обертальному русі." 
+      }
+    ]
+  }
+};
 
 export const kinematicsData = {
   theory: [
@@ -208,6 +264,7 @@ export const kinematicsData = {
     {
       title: "Швидкість рівномірного руху",
       latex: "v = \\frac{s}{t}",
+      imageQuery: "velocity formula physics"
     },
     {
       title: "Координата рівномірного руху",

@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { BlockMath } from "react-katex";
 import {
+  advancedTheory,
   KINEMATICS_TABS,
   kinematicsData,
   type KinematicsGraph,
@@ -119,6 +120,72 @@ function FormulasPanel() {
   );
 }
 
+function AdvancedTheoryPanel() {
+  const { transmissions, circularMotion } = advancedTheory;
+
+  return (
+    <div className="space-y-10">
+      <section>
+        <h2 className="mb-4 text-lg font-semibold text-gray-900">
+          Механічні передачі
+        </h2>
+        <ul className="space-y-3">
+          {transmissions.map((transmission) => (
+            <li
+              key={transmission.name}
+              className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
+            >
+              <h3 className="font-medium text-gray-900">{transmission.name}</h3>
+              <p className="mt-1 text-sm text-gray-600">{transmission.desc}</p>
+              <img
+                src={`https://source.unsplash.com/featured/400x240?${encodeURIComponent(transmission.imageQuery)}`}
+                alt={transmission.imageQuery}
+                className="mt-3 h-40 w-full rounded-lg object-cover"
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="mb-1 text-lg font-semibold text-gray-900">
+          Обертальний рух
+        </h2>
+        <p className="mb-4 text-sm text-gray-500">{circularMotion.title}</p>
+        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+          <table className="w-full min-w-[480px] text-left text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 bg-slate-50">
+                <th className="px-4 py-3 font-medium text-gray-700">Поняття</th>
+                <th className="px-4 py-3 font-medium text-gray-700">Формула</th>
+                <th className="px-4 py-3 font-medium text-gray-700">Опис</th>
+              </tr>
+            </thead>
+            <tbody>
+              {circularMotion.concepts.map((concept) => (
+                <tr
+                  key={concept.name}
+                  className="border-b border-gray-100 last:border-0"
+                >
+                  <td className="px-4 py-3 font-medium text-gray-900">
+                    {concept.name}
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="overflow-x-auto">
+                      <BlockMath math={concept.formula} />
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">{concept.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function ExamplesPanel() {
   return (
     <div className="space-y-4">
@@ -153,6 +220,7 @@ const TAB_PANELS: Record<KinematicsTabId, () => ReactNode> = {
   graphs: GraphsPanel,
   formulas: FormulasPanel,
   examples: ExamplesPanel,
+  "advanced-theory": AdvancedTheoryPanel,
 };
 
 export default function KinematicsTabs() {
