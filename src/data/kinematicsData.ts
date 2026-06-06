@@ -50,26 +50,27 @@ export const advancedTheory = {
     {
       name: "Пасова передача",
       desc: "v1 = v2 (ремені не розтягуються), n2 = n3 (жорстке кріплення).",
-      imageQuery: "belt drive transmission diagram physics"
+      imageFile: "pasova-peredacha.svg"
     },
     {
       name: "Фрикційна передача",
       desc: "n1/n2 = r2/r1 (відношення частот обернене до радіусів).",
-      imageQuery: "friction drive transmission physics"
+      imageFile: "phrykziyna-peredacha.svg"
     },
     {
       name: "Зубчаста передача",
       desc: "r1/r2 = z1/z2, n1/n2 = z2/z1 (відношення частот через кількість зубців).",
-      imageQuery: "gear transmission ratio physics"
+      imageFile: "zubchasta-peredacha.svg"
     },
     {
       name: "Ланцюгова передача",
       desc: "Забезпечує передачу руху без проковзування на великі відстані.",
-      imageQuery: "chain drive mechanism physics"
+      imageFile: "lanzugova-peredacha.svg"
     }
   ],
   circularMotion: {
     title: "Нерівномірний рух по колу",
+    imageFile: "pivne-pryskorennya.svg",
     concepts: [
       { 
         name: "Повне прискорення", 
@@ -264,7 +265,6 @@ export const kinematicsData = {
     {
       title: "Швидкість рівномірного руху",
       latex: "v = \\frac{s}{t}",
-      imageQuery: "velocity formula physics"
     },
     {
       title: "Координата рівномірного руху",

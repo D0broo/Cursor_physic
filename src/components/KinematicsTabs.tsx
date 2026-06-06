@@ -138,9 +138,9 @@ function AdvancedTheoryPanel() {
               <h3 className="font-medium text-gray-900">{transmission.name}</h3>
               <p className="mt-1 text-sm text-gray-600">{transmission.desc}</p>
               <img
-                src={`https://source.unsplash.com/featured/400x240?${encodeURIComponent(transmission.imageQuery)}`}
-                alt={transmission.imageQuery}
-                className="mt-3 h-40 w-full rounded-lg object-cover"
+                src={`/images/${transmission.imageFile}`} // <-- Використовуємо imageFile
+                alt={transmission.name}
+                className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
               />
             </li>
           ))}
@@ -151,8 +151,13 @@ function AdvancedTheoryPanel() {
         <h2 className="mb-1 text-lg font-semibold text-gray-900">
           Обертальний рух
         </h2>
-        <p className="mb-4 text-sm text-gray-500">{circularMotion.title}</p>
-        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+        <p className="text-sm text-gray-500">{circularMotion.title}</p>
+        <img
+                src={`/images/${circularMotion.imageFile}`} // <-- Використовуємо imageFile
+                alt={circularMotion.title}
+                className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
+        />
+        <div className="mt-4 overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
           <table className="w-full min-w-[480px] text-left text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-slate-50">

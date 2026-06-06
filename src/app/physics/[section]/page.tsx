@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DynamicsTabs from "@/components/DynamicsTabs";
 import KinematicsTabs from "@/components/KinematicsTabs";
 import { getSectionBySlug, PHYSICS_SECTIONS } from "@/data/physics-sections";
 
@@ -36,6 +37,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
 
       {slug === "kinematics" ? (
         <KinematicsTabs />
+      ) : slug === "dynamics" ? (
+        <DynamicsTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст

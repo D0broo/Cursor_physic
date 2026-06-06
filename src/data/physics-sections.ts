@@ -6,6 +6,7 @@ export type PhysicsSection = {
 export const PHYSICS_SECTIONS: PhysicsSection[] = [
   { slug: "kinematics", title: "Кінематика" },
   { slug: "dynamics", title: "Динаміка" },
+  { slug: "conservation-laws", title: "Закони збереження" },
   { slug: "moleculare", title: "Молекулярна фізика" },
   { slug: "thermodynamics", title: "Термодинаміка" },
   { slug: "electrodynamics", title: "Електродинаміка" },
