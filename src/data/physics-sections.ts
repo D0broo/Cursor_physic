@@ -7,6 +7,7 @@ export const PHYSICS_SECTIONS: PhysicsSection[] = [
   { slug: "kinematics", title: "Кінематика" },
   { slug: "dynamics", title: "Динаміка" },
   { slug: "conservation-laws", title: "Закони збереження" },
+  { slug: "mechanical-vibrations", title: "Механічні коливання і хвилі"},
   { slug: "moleculare", title: "Молекулярна фізика" },
   { slug: "thermodynamics", title: "Термодинаміка" },
   { slug: "electrodynamics", title: "Електродинаміка" },
