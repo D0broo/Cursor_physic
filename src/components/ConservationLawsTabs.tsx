@@ -21,7 +21,7 @@ function TheoryPanel() {
       <ol className="space-y-3">
         {conservationsData.theory.map((item) => (
           <li
-            key={item.term}
+            key={item.number}
             className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
           >
             <span className="mr-2 font-mono text-sm text-gray-400">
@@ -74,7 +74,7 @@ function FormulasPanel() {
       <ol className="space-y-3" start={35}>
         {conservationsData.formulas.map((formula) => (
           <li
-            key={formula.title}
+            key={formula.number}
             className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
           >
             <p className="mb-3">
