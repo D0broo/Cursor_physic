@@ -377,6 +377,16 @@ export const dynamicsData = {
         "\\text{Паралельне:} \\quad k_{зал} = k_1 + k_2, \\quad F = F_1 + F_2, \\quad x = x_1 = x_2"
       ],
     },
+    {
+      number: 25,
+      title: "Момент сили",
+      latex: "M = F \\cdot l"
+    },
+    {
+      number: 26,
+      title: "Умова рівноваги важеля (Правило моментів)",
+      latex: "M_1 = M_2 \\quad \\text{або} \\quad F_1 l_1 = F_2 l_2"
+    },
   ] satisfies DynamicsFormula[],
 
   algorithms: [
