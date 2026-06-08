@@ -253,12 +253,14 @@ export const dynamicsData = {
       title: "Перший закон Кеплера",
       description:
         "планетки рухаються по еліпсах, в одному з фокусів якого знаходиться Сонце",
+      imageFile: "pershiyzakonkeplera.svg",
     },
     {
       number: 9,
       title: "Другий закон Кеплера",
       description:
         "радіус-вектор планети за рівні проміжки часу описує рівні площі => S1 = S2",
+      imageFile: "drugiyzakonkeplera.svg",
     }
   ] satisfies DynamicsLaw[],
 
