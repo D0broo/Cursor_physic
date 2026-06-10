@@ -48,6 +48,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <MechanicalVibrationsTabs />
       ) : slug === "moleculare" ? (
         <MolecularyTabs />
+      ) : slug === "thermodynamics" ? (
+        <TermoDynamicsTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст
