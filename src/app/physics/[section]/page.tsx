@@ -6,6 +6,7 @@ import { getSectionBySlug, PHYSICS_SECTIONS } from "@/data/physics-sections";
 import ConservationsTabs from "@/components/ConservationLawsTabs";
 import MechanicalVibrationsTabs from "@/components/MechanicalVibrationsTabs";
 import MolecularyTabs from "@/components/MolecularyTabs";
+import TermoDynamicsTabs from "@/components/TermoDynamicTabs";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -48,7 +49,7 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <MechanicalVibrationsTabs />
       ) : slug === "moleculare" ? (
         <MolecularyTabs />
-      ) : slug === "thermodynamics" ? (
+      ) : slug ==="thermodynamics" ? (
         <TermoDynamicsTabs />
       ) : (
         <p className="text-gray-600">
