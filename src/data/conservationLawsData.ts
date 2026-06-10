@@ -120,12 +120,14 @@ export const conservationsData = {
         title: "Закон збереження енергії",
         description:
           "у замкненій системі тіл, які взаємодіють тільки з консервативними силами, повна механічна енергія залишається незмінною (зберігається)",
+        imageFile: "zakonzberezhennyaenergii.png",
       },
       {
         number: 2,
         title: "Закон збереження імпульсу",
         description:
           "у замкненій системі тіл векторна сума імпульсів тіл до взаємодії дорівнює векторній сумі імпульсів тіл після взаємодії",
+          imageFile: "zakonzberezhennyaimpulsu.png",
       },
     ] satisfies ConservationsLaw[],
   

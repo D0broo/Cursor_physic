@@ -180,7 +180,7 @@ export const mechanicalvibrationsData = {
         title: "Закон гармонічних коливань",
         description:
           "описує зміщення (x) тіла від положення рівноваги залежно від часу (t)",
-        imageFile: "garmohichnykolivannya.svg"
+        imageFile: "garmohichnykolivannya.png"
       },
       {
         number: 2,

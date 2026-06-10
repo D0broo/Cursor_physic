@@ -49,7 +49,7 @@ export const advancedTheory = {
   transmissions: [
     {
       name: "Пасова передача",
-      desc: "v1 = v2 (ремені не розтягуються), n2 = n3 (жорстке кріплення).",
+      desc: "v_1 = v_2 (ремені не розтягуються), n2 = n3 (жорстке кріплення).",
       imageFile: "pasova-peredacha.svg"
     },
     {
@@ -70,7 +70,7 @@ export const advancedTheory = {
   ],
   circularMotion: {
     title: "Нерівномірний рух по колу",
-    imageFile: "pivne-pryskorennya.svg",
+    imageFile: "pivne-pryskorennya.png",
     concepts: [
       { 
         name: "Повне прискорення", 
