@@ -6,6 +6,8 @@ import { getSectionBySlug, PHYSICS_SECTIONS } from "@/data/physics-sections";
 import ConservationsTabs from "@/components/ConservationLawsTabs";
 import MechanicalVibrationsTabs from "@/components/MechanicalVibrationsTabs";
 import MolecularyTabs from "@/components/MolecularyTabs";
+import TermoDynamicsTabs from "@/components/TermoDynamicsTabs";
+import PropertiesOfBodiesTabs from "@/components/PropertiesOfBodiesTabs";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -50,6 +52,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <MolecularyTabs />
       ) : slug === "thermodynamics" ? (
         <TermoDynamicsTabs />
+      ) : slug === "propertiesbodies" ? (
+        <PropertiesOfBodiesTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст

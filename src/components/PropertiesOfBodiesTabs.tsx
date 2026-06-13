@@ -3,10 +3,10 @@
 import { useState, type ReactNode } from "react";
 import { BlockMath } from "react-katex";
 import {
-    TERMODYNAMICS_TABS,
-    termoDynamicsData,
-    type TermoDynamicsTabId,
-} from "@/data/termodynamicsData";
+    PROPERTIESBODIES_TABS,
+    propertiesBodiesData,
+    type PropertiesBodiesTabId,
+} from "@/data/propertiesOfBodiesData";
 
 function FormulaBlock({ latex }: { latex: string }) {
     return (
@@ -19,7 +19,7 @@ function FormulaBlock({ latex }: { latex: string }) {
 function TheoryPanel() {
     return (
       <ol className="space-y-3">
-        {termoDynamicsData.theory.map((item) => (
+        {propertiesBodiesData.theory.map((item) => (
           <li
             key={item.number}
             className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
@@ -39,7 +39,7 @@ function TheoryPanel() {
 function LawsPanel() {
     return (
       <div className="space-y-4">
-        {termoDynamicsData.laws.map((law) => (
+        {propertiesBodiesData.laws.map((law) => (
           <article
             key={law.number}
             className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
@@ -72,7 +72,7 @@ function LawsPanel() {
 function FormulasPanel() {
     return (
       <ol className="space-y-3" start={35}>
-        {termoDynamicsData.formulas.map((formula) => (
+        {propertiesBodiesData.formulas.map((formula) => (
           <li
             key={formula.number}
             className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
@@ -98,14 +98,14 @@ function FormulasPanel() {
     );
 }
 
-const TAB_PANELS: Record<TermoDynamicsTabId, () => ReactNode> = {
+const TAB_PANELS: Record<PropertiesBodiesTabId, () => ReactNode> = {
     theory: TheoryPanel,
     laws: LawsPanel,
     formulas: FormulasPanel,
 };
 
-export default function TermoDynamicsTabs() {
-    const [activeTab, setActiveTab] = useState<TermoDynamicsTabId>("theory");
+export default function PropertiesBodiesTabs() {
+    const [activeTab, setActiveTab] = useState<PropertiesBodiesTabId>("theory");
     const ActivePanel = TAB_PANELS[activeTab];
   
     return (
@@ -115,7 +115,7 @@ export default function TermoDynamicsTabs() {
           role="tablist"
           aria-label="Розділи динаміки"
         >
-          {TERMODYNAMICS_TABS.map((tab) => {
+          {PROPERTIESBODIES_TABS.map((tab) => {
             const isActive = activeTab === tab.id;
   
             return (
