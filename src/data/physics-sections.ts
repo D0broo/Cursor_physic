@@ -10,6 +10,7 @@ export const PHYSICS_SECTIONS: PhysicsSection[] = [
   { slug: "mechanical-vibrations", title: "Механічні коливання і хвилі"},
   { slug: "moleculare", title: "Молекулярна фізика" },
   { slug: "thermodynamics", title: "Термодинаміка" },
+  { slug: "propertiesbodies", title: "Властивості газів, рідин і твердих тіл"},
   { slug: "electrodynamics", title: "Електродинаміка" },
   { slug: "optics", title: "Оптика" },
   { slug: "quantum-mechanics", title: "Квантова механіка" },
