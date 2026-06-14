@@ -8,6 +8,7 @@ import MechanicalVibrationsTabs from "@/components/MechanicalVibrationsTabs";
 import MolecularyTabs from "@/components/MolecularyTabs";
 import TermoDynamicsTabs from "@/components/TermoDynamicTabs";
 import PropertiesBodiesTabs from "@/components/PropertiesBodiesTabs";
+import PostiyniyStrumTabs from "@/components/PostiyniyStrumTabs";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -54,6 +55,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <TermoDynamicsTabs />
       ) : slug === "propertiesbodies" ? (
         <PropertiesBodiesTabs />
+      ) : slug === "postiyniystrum" ? (
+        <PostiyniyStrumTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст
