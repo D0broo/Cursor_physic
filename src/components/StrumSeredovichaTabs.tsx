@@ -18,21 +18,40 @@ function FormulaBlock({ latex }: { latex: string }) {
 
 function TheoryPanel() {
     return (
-      <ol className="space-y-3">
-        {strumSeredovichaData.theory.map((item) => (
-          <li
-            key={item.number}
-            className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
-          >
-            <span className="mr-2 font-mono text-sm text-gray-400">
-              {item.number}.
-            </span>
-            <span className="font-semibold text-gray-900">{item.term}</span>
-            <span className="text-gray-400"> — </span>
-            <span className="text-gray-700">{item.description}</span>
-          </li>
+      <div className="space-y-4">
+        {strumSeredovichaData.theory.map((item, index) => (
+          item.isHeader ? (
+            <h2 
+              key={`header-${index}`} 
+              className="mb-2 mt-8 border-b-2 border-blue-100 pb-1 text-lg font-bold uppercase tracking-wide text-blue-700 first:mt-0"
+            >
+              {item.term}
+            </h2>
+          ) : (
+            <div
+              key={item.number || index}
+              className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
+            >
+              <div className="flex items-start gap-3">
+                {item.number && (
+                  <span className="mt-0.5 shrink-0 font-mono text-sm text-gray-400">
+                    {item.number}.
+                  </span>
+                )}
+                <div>
+                  <span className="font-semibold text-gray-900">{item.term}</span>
+                  {item.description && (
+                    <>
+                      <span className="mx-2 text-gray-400">—</span>
+                      <span className="text-gray-700">{item.description}</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
         ))}
-      </ol>
+      </div>
     );
 }
 
