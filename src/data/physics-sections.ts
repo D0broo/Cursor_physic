@@ -15,6 +15,7 @@ export const PHYSICS_SECTIONS: PhysicsSection[] = [
   { slug: "postiyniystrum", title: "Постійний струм"},
   { slug: "strumvriznichseredovischach", title: "Електричний струм у різних середовищах"},
   { slug: "margnitnepole", title: "Магнітне поле, електромагнітна індукція"},
+  { slug: "mangintnivibrations", title: "Електромагнітні коливання і хвилі"},
   { slug: "optics", title: "Оптика" },
   { slug: "quantum-mechanics", title: "Квантова механіка" },
   { slug: "atomic-physics", title: "Атомна фізика" },
