@@ -117,10 +117,108 @@ function FormulasPanel() {
     );
 }
 
+function VahGraph({ type }: { type: string }) {
+  const width = 200;
+  const height = 150;
+  const padding = 20;
+
+  let path = "";
+  if (type === "linear") {
+    path = `M ${padding} ${height - padding} L ${width - padding} ${padding}`;
+  } else if (type === "electrolyte") {
+    path = `M ${padding + 20} ${height - padding} L ${width - padding} ${padding}`;
+  } else if (type === "semiconductor") {
+    path = `M ${padding} ${height - padding} Q ${width / 2} ${height - padding}, ${width - padding} ${padding}`;
+  } else if (type === "gas") {
+    path = `M ${padding} ${height - padding} L ${padding + 30} ${height - 60} Q ${width / 2} ${height - 70}, ${width - 60} ${height - 70} Q ${width - 30} ${height - 70}, ${width - padding} ${padding}`;
+  } else if (type === "vacuum") {
+    path = `M ${padding} ${height - padding} C ${padding + 50} ${height - padding}, ${width - 50} ${height - 50}, ${width - padding} ${padding}`;
+  }
+
+  return (
+    <div className="flex flex-col items-center">
+      <span className="mb-1 text-xs font-semibold text-gray-500">ВАХ (I від U)</span>
+      <svg width={width} height={height} className="overflow-visible">
+        {/* Axes */}
+        <line x1={padding} y1={height - padding} x2={width} y2={height - padding} stroke="black" strokeWidth="2" markerEnd="url(#arrow)" />
+        <line x1={padding} y1={height - padding} x2={padding} y2="0" stroke="black" strokeWidth="2" markerEnd="url(#arrow)" />
+        <text x={width - 5} y={height - padding + 15} fontSize="12">U</text>
+        <text x={padding - 15} y="10" fontSize="12">I</text>
+        
+        {/* Plot */}
+        <path d={path} fill="none" stroke="#2563eb" strokeWidth="3" />
+        
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function RtGraph({ type }: { type: string }) {
+  const width = 200;
+  const height = 150;
+  const padding = 20;
+
+  let path = "";
+  if (type === "increasing") {
+    path = `M ${padding} ${height - 40} L ${width - padding} ${padding}`;
+  } else if (type === "decreasing") {
+    path = `M ${padding} ${padding} Q ${padding + 20} ${height - padding}, ${width - padding} ${height - padding - 20}`;
+  } else if (type === "none") {
+    return (
+      <div className="flex h-[150px] w-[200px] items-center justify-center rounded-lg bg-gray-50 text-center text-xs text-gray-400">
+        Не розглядається<br />в межах курсу
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center">
+      <span className="mb-1 text-xs font-semibold text-gray-500">R від T</span>
+      <svg width={width} height={height} className="overflow-visible">
+        {/* Axes */}
+        <line x1={padding} y1={height - padding} x2={width} y2={height - padding} stroke="black" strokeWidth="2" markerEnd="url(#arrow)" />
+        <line x1={padding} y1={height - padding} x2={padding} y2="0" stroke="black" strokeWidth="2" markerEnd="url(#arrow)" />
+        <text x={width - 5} y={height - padding + 15} fontSize="12">T</text>
+        <text x={padding - 15} y="10" fontSize="12">R</text>
+        
+        {/* Plot */}
+        <path d={path} fill="none" stroke="#dc2626" strokeWidth="3" />
+      </svg>
+    </div>
+  );
+}
+
+function GraphsPanel() {
+  return (
+    <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+      {strumSeredovichaData.graphs.map((graph) => (
+        <article
+          key={graph.id}
+          className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+        >
+          <h3 className="mb-2 text-lg font-bold text-gray-900">{graph.title}</h3>
+          <p className="mb-6 text-sm text-gray-600">{graph.description}</p>
+          
+          <div className="flex flex-wrap justify-around gap-8">
+            <VahGraph type={graph.vahType} />
+            <RtGraph type={graph.rtType} />
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 const TAB_PANELS: Record<StrumSeredovichaTabId, () => ReactNode> = {
     theory: TheoryPanel,
     laws: LawsPanel,
     formulas: FormulasPanel,
+    graphs: GraphsPanel,
 };
 
 export default function StrumSeredovichaTabs() {

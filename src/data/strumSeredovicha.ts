@@ -1,6 +1,6 @@
 
 
-export type StrumSeredovichaTabId = "theory" | "laws" | "formulas";
+export type StrumSeredovichaTabId = "theory" | "laws" | "formulas" | "graphs";
 
 export type StrumSeredovichaTab = {
     id: StrumSeredovichaTabId;
@@ -30,10 +30,19 @@ export type StrumSeredovichaFormula = {
     latex: string | string[];
 };
 
+export type StrumSeredovichaGraph = {
+    id: string;
+    title: string;
+    description: string;
+    vahType: "linear" | "semiconductor" | "gas" | "vacuum" | "electrolyte";
+    rtType: "increasing" | "decreasing" | "none";
+};
+
 export const STRUMSEREDOVICHA_TABS: StrumSeredovichaTab[] = [
     { id: "theory", label: "Теорія" },
     { id: "laws", label: "Закони" },
     { id: "formulas", label: "Формули" },
+    { id: "graphs", label: "Графіки" },
 ];
 
 export const strumSeredovichaData = {
@@ -235,4 +244,42 @@ export const strumSeredovichaData = {
             ],
           },
     ] satisfies StrumSeredovichaFormula[],
+
+    graphs: [
+        {
+            id: "metals",
+            title: "Метали",
+            description: "ВАХ лінійна (закон Ома). Опір лінійно зростає з температурою.",
+            vahType: "linear",
+            rtType: "increasing",
+        },
+        {
+            id: "electrolytes",
+            title: "Електроліти",
+            description: "ВАХ лінійна (після подолання потенціалу поляризації). Опір зменшується з температурою через збільшення дисоціації.",
+            vahType: "electrolyte",
+            rtType: "decreasing",
+        },
+        {
+            id: "semiconductors",
+            title: "Напівпровідники",
+            description: "ВАХ нелінійна (експоненціальна для p-n переходу). Опір різко зменшується з температурою.",
+            vahType: "semiconductor",
+            rtType: "decreasing",
+        },
+        {
+            id: "gases",
+            title: "Гази",
+            description: "ВАХ складна: ділянка закону Ома, насичення та самостійний розряд. Опір зменшується при іонізації.",
+            vahType: "gas",
+            rtType: "decreasing",
+        },
+        {
+            id: "vacuum",
+            title: "Вакуум (вакуумний діод)",
+            description: "ВАХ підлягає закону 'трьох других' (закон Ленгмюра). Залежність опору від температури зазвичай не розглядається в такому ж сенсі, як для речовин.",
+            vahType: "vacuum",
+            rtType: "none",
+        },
+    ] satisfies StrumSeredovichaGraph[],
   };
