@@ -46,6 +46,13 @@ function TheoryPanel() {
                       <span className="text-gray-700">{item.description}</span>
                     </>
                   )}
+                  {item.imageFile && (
+                    <img
+                      src={`/images/${item.imageFile}`} // <-- Використовуємо imageFile
+                      alt={item.title}
+                      className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
+                    />
+                  )}
                 </div>
               </div>
             </div>
