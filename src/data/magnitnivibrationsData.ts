@@ -1,5 +1,5 @@
 
-export type MagnitnivibrationsTabId = "theory" | "laws" | "formulas";
+export type MagnitnivibrationsTabId = "theory" | "laws" | "formulas" | "phase-shift";
 
 export type MagnitnivibrationsTab = {
     id: MagnitnivibrationsTabId;
@@ -11,6 +11,7 @@ export type MagnitnivibrationsDefinition = {
     term: string;
     description?: string;
     isHeader?: boolean;
+    imageFile?: string;
   };
   
 export type MagnitnivibrationsLaw = {
@@ -33,6 +34,7 @@ export const MAGNITNIVIBRATIONS_TABS: MagnitnivibrationsTab[] = [
     { id: "theory", label: "Теорія" },
     { id: "laws", label: "Закони, правила та досліди" },
     { id: "formulas", label: "Формули" },
+    { id: "phase-shift", label: "Зсув фаз" },
 ];
 
 export const magnitnivibrationsData = {
@@ -139,7 +141,7 @@ export const magnitnivibrationsData = {
             term: "Діапазони радіохвиль",
             description: "Довгі (ДХ) — огинають перешкоди; Середні (СХ) — відбиваються від іоносфери; Короткі (КХ) — зв'язок на великі відстані; Ультракороткі (УКХ) — висока якість, пряма видимість.",
         },
-    ] satisfies MagnitnivibrationsDefinition[],
+    ] as MagnitnivibrationsDefinition[],
   
     laws: [
         {
@@ -176,7 +178,7 @@ export const magnitnivibrationsData = {
             description: "Пристрій для зміни напруги змінного струму. Будова: первинна обмотка (створює магнітний потік) та вторинна обмотка (наводить вихідну напругу).",
             imageFile: "transformator.png",
         },
-    ] satisfies MagnitnivibrationsLaw[],
+    ] as MagnitnivibrationsLaw[],
   
     formulas: [
         {
@@ -271,5 +273,5 @@ export const magnitnivibrationsData = {
                 "U_{\\text{д}} = \\frac{U_{\\text{max}}}{\\sqrt{2}}"
             ]
         },
-    ] satisfies MagnitnivibrationsFormula[],
+    ] as MagnitnivibrationsFormula[],
 };

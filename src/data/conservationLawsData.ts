@@ -18,6 +18,7 @@ export type ConservationsLaw = {
     latex?: string;
     note?: string;
     imageQuery?: string;
+    imageFile?: string;
 };
   
 export type ConservationsFormula = {
@@ -112,7 +113,7 @@ export const conservationsData = {
         description:
           "для консервативної сили робота не залежить від форми траєкторії, а визначається лише початковим і кінцевим положенням тіла",
       }
-    ] satisfies ConservationsDefinition[],
+    ] as ConservationsDefinition[],
   
     laws: [
       {
@@ -129,7 +130,7 @@ export const conservationsData = {
           "у замкненій системі тіл векторна сума імпульсів тіл до взаємодії дорівнює векторній сумі імпульсів тіл після взаємодії",
           imageFile: "zakonzberezhennyaimpulsu.png",
       },
-    ] satisfies ConservationsLaw[],
+    ] as ConservationsLaw[],
   
     formulas: [
           {
@@ -184,5 +185,5 @@ export const conservationsData = {
               "p + \\frac{\\rho v^2}{2} + \\rho gh = const \\quad (\\text{Рівняння Бернуллі})"
             ],
           },
-    ] satisfies ConservationsFormula[],
+    ] as ConservationsFormula[],
   };

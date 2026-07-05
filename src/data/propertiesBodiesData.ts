@@ -18,6 +18,7 @@ export type PropertiesBodiesLaw = {
     latex?: string;
     note?: string;
     imageQuery?: string;
+    imageFile?: string;
 };
   
 export type PropertiesBodiesFormula = {
@@ -164,7 +165,7 @@ export const propertiesBodiessData = {
             term: "Міцність",
             description: "Здатність матеріалу чинити опір руйнуванню під дією зовнішніх сил.",
           },
-    ] satisfies PropertiesBodiesDefinition[],
+    ] as PropertiesBodiesDefinition[],
   
     laws: [
         {
@@ -191,7 +192,7 @@ export const propertiesBodiessData = {
             note: "Ключові точки: межа пропорційності, межа пружності, межа міцності та точка руйнування.",
             imageFile: "deformazii.png"
           },
-    ] satisfies PropertiesBodiesLaw[],
+    ] as PropertiesBodiesLaw[],
   
     formulas: [
         {
@@ -241,5 +242,5 @@ export const propertiesBodiessData = {
             title: "Запас міцності",
             latex: "n = \\frac{\\sigma_{max}}{\\sigma}",
           },
-    ] satisfies PropertiesBodiesFormula[],
+    ] as PropertiesBodiesFormula[],
   };

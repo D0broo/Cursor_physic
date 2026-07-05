@@ -18,6 +18,7 @@ export type DynamicsLaw = {
   latex?: string;
   note?: string;
   imageQuery?: string;
+  imageFile?: string;
 };
 
 export type DynamicsFormula = {
@@ -197,7 +198,7 @@ export const dynamicsData = {
       description:
         "фізична величина, яка дорівнює відношенню маси речовини до її об'єму",
     },
-  ] satisfies DynamicsDefinition[],
+  ] as DynamicsDefinition[],
 
   laws: [
     {
@@ -264,7 +265,7 @@ export const dynamicsData = {
         "радіус-вектор планети за рівні проміжки часу описує рівні площі => S1 = S2",
       imageFile: "drugiyzakonkeplera.svg",
     }
-  ] satisfies DynamicsLaw[],
+  ] as DynamicsLaw[],
 
   formulas: [
     {
@@ -403,7 +404,7 @@ export const dynamicsData = {
       title: "Умова рівноваги важеля (Правило моментів)",
       latex: "M_1 = M_2 \\quad \\text{або} \\quad F_1 l_1 = F_2 l_2"
     },
-  ] satisfies DynamicsFormula[],
+  ] as DynamicsFormula[],
 
   algorithms: [
     "Уважно прочитайте умову задачі. З'ясуйте, які сили діють на тіло та характер руху тіла (рухається тіло рівномірно чи з прискоренням; якою є траєкторія руху тіла).",

@@ -196,7 +196,7 @@ export const kinematicsData = {
       description:
         "фізична величина, що дорівнює кількості однакових подій за одиницю часу",
     },
-  ] satisfies KinematicsDefinition[],
+  ] as KinematicsDefinition[],
 
   graphs: [
     {
@@ -259,7 +259,7 @@ export const kinematicsData = {
         "Графік v(t) — пряма через початок координат. v = gt, де g ≈ 9,8 м/с².",
       shape: "linear-through-origin",
     },
-  ] satisfies KinematicsGraph[],
+  ] as KinematicsGraph[],
 
   formulas: [
     {
@@ -321,7 +321,7 @@ export const kinematicsData = {
       title: "Довжина кола",
       latex: "C = 2\\pi R",
     },
-  ] satisfies KinematicsFormula[],
+  ] as KinematicsFormula[],
 
   examples: [
     {
@@ -388,5 +388,5 @@ export const kinematicsData = {
       ],
       answer: "v ≈ 0,79 м/с, ω ≈ 1,57 рад/с, a ≈ 1,23 м/с²",
     },
-  ] satisfies KinematicsExample[],
+  ] as KinematicsExample[],
 };

@@ -179,7 +179,7 @@ export const strumSeredovichaData = {
             term: "Вакуумний діод",
             description: "прилад, що складається з катода й анода у вакуумному балоні; має однобічну провідність.",
         },
-    ] satisfies StrumSeredovichaDefinition[],
+    ] as StrumSeredovichaDefinition[],
   
     laws: [
         {
@@ -196,7 +196,7 @@ export const strumSeredovichaData = {
             latex: "k = \\frac{1}{F} \\cdot \\frac{M}{n}",
             note: "F — стала Фарадея (F ≈ 96485 Кл/моль).",
         },
-    ] satisfies StrumSeredovichaLaw[],
+    ] as StrumSeredovichaLaw[],
   
     formulas: [
         {
@@ -234,5 +234,5 @@ export const strumSeredovichaData = {
               "\\alpha = \\frac{R - R_0}{R_0 \\Delta T} \\quad (\\text{Термічний коефіцієнт})"
             ],
           },
-    ] satisfies StrumSeredovichaFormula[],
+    ] as StrumSeredovichaFormula[],
   };
