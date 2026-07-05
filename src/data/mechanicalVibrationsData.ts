@@ -1,6 +1,6 @@
 export type MechanicalVibrationsTabId = "theory" | "laws" | "formulas";
 
-export type MechaniclaVibrationsTab = {
+export type MechanicalVibrationsTab = {
     id: MechanicalVibrationsTabId;
     label: string;
 };
@@ -18,6 +18,7 @@ export type MechanicalVibrationsLaw = {
     latex?: string;
     note?: string;
     imageQuery?: string;
+    imageFile?: string;
 };
   
 export type MechanicalVibrationsFormula = {
@@ -172,65 +173,65 @@ export const mechanicalvibrationsData = {
         description:
           "відстань між фронтами хвилі",
       },
-    ] satisfies MechanicalVibrationsDefinition[],
+    ] as MechanicalVibrationsDefinition[],
   
     laws: [
-      {
-        number: 1,
-        title: "Закон гармонічних коливань",
-        description:
-          "описує зміщення (x) тіла від положення рівноваги залежно від часу (t)",
-        imageFile: "garmohichnykolivannya.png"
-      },
-      {
-        number: 2,
-        title: "Закон поширення енергії",
-        description:
-          "хвилі переносять енергію у просторі без перенесення речовини. Інтенсивність хвилі прямо пропорційна квадрату її амплітуди",
-      },
-    ] satisfies MechanicalVibrationsLaw[],
+        {
+            number: 1,
+            title: "Закон гармонічних коливань",
+            description:
+              "описує зміщення (x) тіла від положення рівноваги залежно від часу (t)",
+            imageFile: "garmohichnykolivannya.png"
+        },
+        {
+            number: 2,
+            title: "Закон поширення енергії",
+            description:
+              "хвилі переносять енергію у просторі без перенесення речовини. Інтенсивність хвилі прямо пропорційна квадрату її амплітуди",
+        },
+    ] as MechanicalVibrationsLaw[],
   
     formulas: [
-      {
-        number: 1,
-        title: "Період коливань",
-        latex: [
-          "T = \\frac{t}{n} \\quad (\\text{Базова})",
-          "T = 2\\pi \\sqrt{\\frac{m}{k}} \\quad (\\text{Пружинний маятник})",
-          "T = 2\\pi \\sqrt{\\frac{l}{g}} \\quad (\\text{Нитяний маятник})"
-        ],
-      },
-      {
-        number: 2,
-        title: "Частота коливань",
-        latex: [
-          "\\nu = \\frac{n}{t} \\quad (\\text{Базова})",
-          "\\nu = \\frac{1}{T} \\quad (\\text{Зв'язок з періодом})"
-        ],
-      },
-      {
-        number: 3,
-        title: "Циклічна частота",
-        latex: [
-          "\\omega = \\frac{2\\pi}{T}",
-          "\\omega = 2\\pi \\nu"
-        ],
-      },
-      {
-        number: 4,
-        title: "Рівняння гармонічних коливань",
-        latex: [
-          "x(t) = A \\sin(\\omega t + \\varphi_0)",
-          "x(t) = A \\cos(\\omega t + \\varphi_0)"
-        ],
-      },
-      {
-        number: 5,
-        title: "Хвилі",
-        latex: [
-          "\\lambda = v \\cdot T = \\frac{v}{\\nu} \\quad (\\text{Довжина хвилі})",
-          "y(x, t) = A \\cos(\\omega t - \\frac{2\\pi x}{\\lambda}) \\quad (\\text{Рівняння хвилі})"
-        ],
-      },
-    ] satisfies MechanicalVibrationsFormula[],
+        {
+            number: 1,
+            title: "Період коливань",
+            latex: [
+              "T = \\frac{t}{n} \\quad (\\text{Базова})",
+              "T = 2\\pi \\sqrt{\\frac{m}{k}} \\quad (\\text{Пружинний маятник})",
+              "T = 2\\pi \\sqrt{\\frac{l}{g}} \\quad (\\text{Нитяний маятник})"
+            ],
+        },
+        {
+            number: 2,
+            title: "Частота коливань",
+            latex: [
+              "\\nu = \\frac{n}{t} \\quad (\\text{Базова})",
+              "\\nu = \\frac{1}{T} \\quad (\\text{Зв'язок з періодом})"
+            ],
+        },
+        {
+            number: 3,
+            title: "Циклічна частота",
+            latex: [
+              "\\omega = \\frac{2\\pi}{T}",
+              "\\omega = 2\\pi \\nu"
+            ],
+        },
+        {
+            number: 4,
+            title: "Рівняння гармонічних коливань",
+            latex: [
+              "x(t) = A \\sin(\\omega t + \\varphi_0)",
+              "x(t) = A \\cos(\\omega t + \\varphi_0)"
+            ],
+        },
+        {
+            number: 5,
+            title: "Хвилі",
+            latex: [
+              "\\lambda = v \\cdot T = \\frac{v}{\\nu} \\quad (\\text{Довжина хвилі})",
+              "y(x, t) = A \\cos(\\omega t - \\frac{2\\pi x}{\\lambda}) \\quad (\\text{Рівняння хвилі})"
+            ],
+        },
+    ] as MechanicalVibrationsFormula[],
   };

@@ -18,6 +18,7 @@ export type TermoDynamicsLaw = {
     latex?: string;
     note?: string;
     imageQuery?: string;
+    imageFile?: string;
 };
   
 export type TermoDynamicsFormula = {
@@ -94,7 +95,7 @@ export const termoDynamicsData = {
         term: "Структурна схема теплового двигуна",
         description: "Основні елементи: нагрівник, робоче тіло, холодильник. Конструктивні частини: циліндр, поршень, шатун, колінчастий вал, клапани, свічка запалювання.",
       },
-    ] satisfies TermoDynamicsDefinition[],
+    ] as TermoDynamicsDefinition[],
   
     laws: [
       {
@@ -118,7 +119,7 @@ export const termoDynamicsData = {
         latex: "\\lim_{T \\to 0} S = 0",
         note: "Вчений: Нернст. Досягти температури абсолютного нуля за скінченну кількість кроків неможливо."
       },
-    ] satisfies TermoDynamicsLaw[],
+    ] as TermoDynamicsLaw[],
   
     formulas: [
       {
@@ -167,5 +168,5 @@ export const termoDynamicsData = {
         title: "Рівняння теплового балансу",
         latex: "\\sum Q_{одержано} = \\sum Q_{віддано}",
       },
-    ] satisfies TermoDynamicsFormula[],
+    ] as TermoDynamicsFormula[],
   };

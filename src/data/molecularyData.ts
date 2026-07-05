@@ -18,6 +18,7 @@ export type MolecularyLaw = {
     latex?: string;
     note?: string;
     imageQuery?: string;
+    imageFile?: string;
 };
   
 export type MolecularyFormula = {
@@ -95,7 +96,7 @@ export const molecularyData = {
         term: "Закон Дальтона",
         description: "Тиск суміші газів дорівнює сумі парціальних тисків усіх газів, що входять до її складу.",
       },
-    ] satisfies MolecularyDefinition[],
+    ] as MolecularyDefinition[],
   
     laws: [
       {
@@ -122,7 +123,7 @@ export const molecularyData = {
         note: "Вчений: Шарль. При нагріванні в закритій посудині тиск зростає.",
         imageFile: "izohora.png"
       },
-    ] satisfies MolecularyLaw[],
+    ] as MolecularyLaw[],
   
     formulas: [
         {
@@ -174,5 +175,5 @@ export const molecularyData = {
               "p = \\sum p_i \\quad (\\text{Закон Дальтона})"
             ],
           },
-    ] satisfies MolecularyFormula[],
+    ] as MolecularyFormula[],
   };

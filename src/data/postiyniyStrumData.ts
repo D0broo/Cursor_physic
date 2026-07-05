@@ -117,7 +117,7 @@ export const postiyniyStrumData = {
             term: "Електрорушійна сила (ЕРС)",
             description: "Скалярна фізична величина, що характеризує енергетичні властивості джерела струму. Дорівнює відношенню роботи сторонніх сил до величини перенесеного заряду.",
           },
-    ] satisfies PostiyniyStrumDefinition[],
+    ] as PostiyniyStrumDefinition[],
   
     laws: [
         {
@@ -135,7 +135,7 @@ export const postiyniyStrumData = {
             latex: "\\sum I_i = 0, \\quad \\sum I_k R_k = \\sum \\varepsilon_k",
             note: "Перший закон є наслідком закону збереження електричного заряду, а другий — закону збереження енергії."
           },
-    ] satisfies PostiyniyStrumLaw[],
+    ] as PostiyniyStrumLaw[],
   
     formulas: [
         {
@@ -195,5 +195,5 @@ export const postiyniyStrumData = {
               "U = U_1 = U_2, \\quad I = I_1 + I_2, \\quad \\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2} \\quad (\\text{Паралельне})"
             ],
           },
-    ] satisfies PostiyniyStrumFormula[],
+    ] as PostiyniyStrumFormula[],
   };

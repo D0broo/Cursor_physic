@@ -1,5 +1,5 @@
 
-export type MagnitnivibrationsTabId = "theory" | "laws" | "formulas";
+export type MagnitnivibrationsTabId = "theory" | "laws" | "formulas" | "phase-shift";
 
 export type MagnitnivibrationsTab = {
     id: MagnitnivibrationsTabId;
@@ -11,6 +11,7 @@ export type MagnitnivibrationsDefinition = {
     term: string;
     description?: string;
     isHeader?: boolean;
+    imageFile?: string;
   };
   
 export type MagnitnivibrationsLaw = {
@@ -33,6 +34,7 @@ export const MAGNITNIVIBRATIONS_TABS: MagnitnivibrationsTab[] = [
     { id: "theory", label: "Теорія" },
     { id: "laws", label: "Закони, правила та досліди" },
     { id: "formulas", label: "Формули" },
+    { id: "phase-shift", label: "Зсув фаз" },
 ];
 
 export const magnitnivibrationsData = {
@@ -61,11 +63,13 @@ export const magnitnivibrationsData = {
             number: 5,
             term: "Коливальний контур",
             description: "Це фізичний пристрій, який складається з послідовно з'єднаних конденсатора і котушки індуктивності.",
+            imageFile: "kolivalniykontur.png",
         },
         {
             number: 6,
             term: "Перетворення енергії в коливальному контурі",
             description: "Енергія не зникає, а постійно перетворюється між електричним і магнітним полями.",
+            imageFile: "konturenergy.png",
         },
         {
             number: 7,
@@ -137,7 +141,7 @@ export const magnitnivibrationsData = {
             term: "Діапазони радіохвиль",
             description: "Довгі (ДХ) — огинають перешкоди; Середні (СХ) — відбиваються від іоносфери; Короткі (КХ) — зв'язок на великі відстані; Ультракороткі (УКХ) — висока якість, пряма видимість.",
         },
-    ] satisfies MagnitnivibrationsDefinition[],
+    ] as MagnitnivibrationsDefinition[],
   
     laws: [
         {
@@ -154,8 +158,27 @@ export const magnitnivibrationsData = {
             number: 3,
             title: "Схема найпростішого радіоприймача",
             description: "Антена — приймає електромагнітні хвилі. Коливальний контур (котушка + конденсатор) — виділяє сигнал потрібної частоти. Діод (детектор) — здійснює детектування, тобто виділяє звуковий сигнал. Навушники (телефон) — перетворюють електричні коливання на звук. Заземлення — покращує прийом сигналу.",
+            imageFile: "radiopriymachschema.png",
         },
-    ] satisfies MagnitnivibrationsLaw[],
+        {
+            number: 4,
+            title: "Структурна схема генератора незатухаючих коливань",
+            description: "Джерело енергії (живлення); Коливальний контур (частотозадавальний елемент);",
+            imageFile: "nezatkolivannya.png",
+        },
+        {
+            number: 5,
+            title: "Схема генератора незатухаючих коливань на транзисторі",
+            description: "Джерело енергії (живлення); Транзистор; Коливальний контур (частотозадавальний елемент);",
+            imageFile: "nezatkolivannyatrans.png",
+        },
+        {
+            number: 6,
+            title: "Трансформатор, будова",
+            description: "Пристрій для зміни напруги змінного струму. Будова: первинна обмотка (створює магнітний потік) та вторинна обмотка (наводить вихідну напругу).",
+            imageFile: "transformator.png",
+        },
+    ] as MagnitnivibrationsLaw[],
   
     formulas: [
         {
@@ -250,5 +273,5 @@ export const magnitnivibrationsData = {
                 "U_{\\text{д}} = \\frac{U_{\\text{max}}}{\\sqrt{2}}"
             ]
         },
-    ] satisfies MagnitnivibrationsFormula[],
+    ] as MagnitnivibrationsFormula[],
 };
