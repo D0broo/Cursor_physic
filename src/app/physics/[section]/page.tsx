@@ -13,6 +13,7 @@ import StrumSeredovichaTabs from "@/components/StrumSeredovichaTabs";
 import MagnitnepoleTabs from "@/components/MagnitnepoleTabs";
 import MagnitnivibrationsTabs from "@/components/MagnitnivibrationsTabs";
 import ElectrostaticsTabs from "@/components/ElectrostaticsTabs";
+import GeomOpticaTabs from "@/components/GeomOpticaTabs";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -69,6 +70,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <MagnitnivibrationsTabs />
       ) : slug === "electrostatycs" ? (
         <ElectrostaticsTabs />
+      ) : slug === "optics-geometric" ? (
+        <GeomOpticaTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст
