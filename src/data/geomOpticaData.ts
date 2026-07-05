@@ -1,5 +1,5 @@
 
-export type GeomOpticaTabId = "theory" | "laws" | "formulas" | "phase-shift";
+export type GeomOpticaTabId = "theory" | "laws" | "formulas" | "algorithm";
 
 export type GeomOpticaTab = {
     id: GeomOpticaTabId;
@@ -30,10 +30,28 @@ export type GeomOpticaFormula = {
     latex: string | string[];
 };
 
+export type GeomOpticaAlgorithmStep = {
+    number: number;
+    description: string;
+    note?: string;
+    imageFile?: string;
+};
+
+export type GeomOpticaCharacteristic = {
+    title: string;
+    description: string;
+};
+
+export type GeomOpticaAlgorithm = {
+    steps: GeomOpticaAlgorithmStep[];
+    characteristics: GeomOpticaCharacteristic[];
+};
+
 export const GEOMOPTICA_TABS: GeomOpticaTab[] = [
     { id: "theory", label: "Теорія" },
     { id: "laws", label: "Закони, правила та досліди" },
     { id: "formulas", label: "Формули" },
+    { id: "algorithm", label: "Алгоритм побудови зображення в плоскому зеркалі" },
 ];
 
 export const geomOpticaData = {
@@ -191,4 +209,69 @@ export const geomOpticaData = {
             ]
         }
     ] as GeomOpticaFormula[],
+
+    algorithm: {
+        steps: [
+            {
+                number: 1,
+                description: "Будуємо схематичне зображення дзеркальної поверхні"
+            },
+            {
+                number: 2,
+                description: "Будуємо схематичне зображення світної точки"
+            },
+            {
+                number: 3,
+                description: "Будуємо два падаючі промені",
+                note: "Краще, коли промені падають на краї дзеркала"
+            },
+            {
+                number: 4,
+                description: "Через точки (А і В) падіння променів будуємо перпендикуляри до дзеркальної поверхні"
+            },
+            {
+                number: 5,
+                description: "Вимірюємо кути падіння"
+            },
+            {
+                number: 6,
+                description: "З іншого боку від кожного перпендикуляра відкладаємо кути відбивання, які дорівнюють відповідним кутам падіння"
+            },
+            {
+                number: 7,
+                description: "Будуємо відбиті промені"
+            },
+            {
+                number: 8,
+                description: "Для кожного відбитого променя будуємо його продовження у задзеркалля"
+            },
+            {
+                number: 9,
+                description: "Точка перетину цих продовжень є зображенням світної точки S у плоскому дзеркалі",
+                note: "Якщо побудовап виконана правильно, то точки повинні лежати на прямій, перпендикулярній до дзеркальної поверхні"
+            },
+        ] as GeomOpticaAlgorithmStep[],
+        characteristics: [
+            {
+                title: "Уявне",
+                description: "утворене перетином уявних (продовжених за дзеркало) променів, а не самих променів."
+            },
+            {
+                title: "Пряме",
+                description: "орієнтація зображення співпадає з орієнтацією предмета."
+            },
+            {
+                title: "Рівне за розміром",
+                description: "розміри зображення дорівнюють розмірам предмета."
+            },
+            {
+                title: "Симетричне",
+                description: "розташоване симетрично відносно площини дзеркала."
+            },
+            {
+                title: "На тій самій відстані",
+                description: "знаходиться за дзеркалом на такій самій відстані, на якій предмет розташований перед ним."
+            },
+        ] as GeomOpticaCharacteristic[],
+    } as GeomOpticaAlgorithm,
 };
