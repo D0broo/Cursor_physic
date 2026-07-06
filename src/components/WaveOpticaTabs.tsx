@@ -124,69 +124,10 @@ function FormulasPanel() {
     );
 }
 
-function AlgorithmPanel() {
-    const { steps, characteristics } = waveOpticaData.algorithm;
-    return (
-      <div className="space-y-6">
-        <div className="space-y-3">
-          <h2 className="mb-2 border-b-2 border-blue-100 pb-1 text-lg font-bold uppercase tracking-wide text-blue-700">
-            Алгоритм побудови
-          </h2>
-          <ol className="space-y-3">
-            {steps.map((step) => (
-              <li
-                key={step.number}
-                className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
-              >
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
-                    {step.number}
-                  </span>
-                  <div>
-                    <p className="text-gray-700">{step.description}</p>
-                    {step.note && (
-                      <p className="mt-2 text-sm text-gray-500">{step.note}</p>
-                    )}
-                    {step.imageFile && (
-                      <img
-                        src={`/images/${step.imageFile}`}
-                        alt={`Крок ${step.number}`}
-                        className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
-                      />
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="space-y-3">
-          <h2 className="mb-2 border-b-2 border-blue-100 pb-1 text-lg font-bold uppercase tracking-wide text-blue-700">
-            Характеристики зображення
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {characteristics.map((ch) => (
-              <div
-                key={ch.title}
-                className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm"
-              >
-                <span className="font-semibold text-gray-900">{ch.title}</span>
-                <span className="mx-2 text-gray-400">—</span>
-                <span className="text-gray-700">{ch.description}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-}
-
 const TAB_PANELS: Record<WaveOpticaTabId, () => ReactNode> = {
     theory: TheoryPanel,
     laws: LawsPanel,
-    formulas: FormulasPanel,
-    algorithm: AlgorithmPanel
+    formulas: FormulasPanel
 };
 
 export default function WaveOpticaTabs() {

@@ -13,6 +13,62 @@ export default function Home() {
         </p>
       </header>
 
+      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/formules"
+          className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
+        >
+          <div>
+            <span className="block text-lg font-semibold text-blue-800">
+              Усі формули
+            </span>
+            <span className="text-sm text-blue-700/80">
+              Зведений довідник формул усіх розділів
+            </span>
+          </div>
+          <svg
+            className="h-5 w-5 text-blue-500 transition-transform group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </Link>
+
+        <Link
+          href="/units"
+          className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
+        >
+          <div>
+            <span className="block text-lg font-semibold text-blue-800">
+              Одиниці вимірювання SI
+            </span>
+            <span className="text-sm text-blue-700/80">
+              Основні та похідні одиниці з виразами
+            </span>
+          </div>
+          <svg
+            className="h-5 w-5 text-blue-500 transition-transform group-hover:translate-x-1"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </Link>
+      </div>
+
       <div className="space-y-12">
         {PHYSICS_CATEGORIES.map((category) => (
           <section key={category.title}>
