@@ -31,22 +31,22 @@ export default function SearchBox() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Пошук термінів, законів, формул…"
-        className="w-full rounded-xl border border-gray-300 bg-white px-5 py-3 text-base shadow-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+        className="w-full rounded-xl border border-gray-300 bg-white px-5 py-3 text-base text-gray-900 shadow-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:ring-blue-900/50"
       />
 
       {query.trim().length >= 2 && (
-        <div className="absolute z-10 mt-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
+        <div className="absolute z-10 mt-2 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800">
           {results.length === 0 ? (
-            <p className="px-5 py-6 text-center text-sm text-gray-500">
+            <p className="px-5 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
               Нічого не знайдено.
             </p>
           ) : (
-            <ul className="max-h-[28rem] divide-y divide-gray-100 overflow-y-auto">
+            <ul className="max-h-[28rem] divide-y divide-gray-100 overflow-y-auto dark:divide-gray-700">
               {results.map((r, i) => (
                 <li key={i}>
                   <Link
                     href={`/physics/${r.sectionSlug}`}
-                    className="flex flex-col gap-1 px-5 py-3 transition-colors hover:bg-blue-50"
+                    className="flex flex-col gap-1 px-5 py-3 transition-colors hover:bg-blue-50 dark:hover:bg-gray-700"
                   >
                     <div className="flex items-center gap-2">
                       <span
@@ -54,14 +54,14 @@ export default function SearchBox() {
                       >
                         {r.type}
                       </span>
-                      <span className="font-medium text-gray-900">{r.title}</span>
+                      <span className="font-medium text-gray-900 dark:text-gray-100">{r.title}</span>
                     </div>
                     {r.snippet && (
-                      <span className="line-clamp-2 text-sm text-gray-500">
+                      <span className="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
                         {r.snippet}
                       </span>
                     )}
-                    <span className="text-xs text-blue-600">
+                    <span className="text-xs text-blue-600 dark:text-blue-400">
                       {r.sectionTitle}
                     </span>
                   </Link>

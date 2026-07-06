@@ -27,10 +27,10 @@ function FormulaItem({
   latex: string | string[];
 }) {
   return (
-    <li className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm">
+    <li className="rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <p className="mb-3">
-        <span className="mr-2 font-mono text-sm text-gray-400">{index}.</span>
-        <span className="font-medium text-gray-900">{title}</span>
+        <span className="mr-2 font-mono text-sm text-gray-400 dark:text-gray-500">{index}.</span>
+        <span className="font-medium text-gray-900 dark:text-gray-100">{title}</span>
       </p>
       {Array.isArray(latex) ? (
         <div className="space-y-2">
@@ -48,7 +48,7 @@ function FormulaItem({
 function SectionBlock({ section, startIndex }: { section: FormulaSection; startIndex: number }) {
   return (
     <section>
-      <h3 className="mb-3 mt-2 text-xl font-bold text-gray-800">
+      <h3 className="mb-3 mt-2 text-xl font-bold text-gray-800 dark:text-gray-100">
         {section.title}
       </h3>
       <ol className="space-y-3" start={startIndex}>
@@ -95,18 +95,18 @@ export default function FormulasPage() {
     <main className="mx-auto max-w-3xl px-4 py-12">
       <Link
         href="/"
-        className="mb-8 inline-block text-sm text-blue-600 hover:underline"
+        className="no-print mb-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
       >
         ← Назад до розділів
       </Link>
 
-      <h1 className="mb-6 text-3xl font-bold tracking-tight sm:text-4xl">
+      <h1 className="mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
         Усі формули
       </h1>
 
       <div className="mb-6 space-y-3">
         <nav
-          className="flex flex-wrap gap-1 rounded-xl border border-gray-200 bg-white p-1.5 shadow-sm"
+          className="no-print flex flex-wrap gap-1 rounded-xl border border-gray-200 bg-white p-1.5 shadow-sm dark:border-gray-700 dark:bg-gray-800"
           aria-label="Фільтр за категоріями"
         >
           {["Усі", ...FORMULA_CATEGORIES].map((cat) => {
@@ -119,7 +119,7 @@ export default function FormulasPage() {
                 className={`shrink-0 rounded-lg px-3 py-2 text-sm font-medium transition-all ${
                   isActive
                     ? "bg-blue-600 text-white shadow-sm"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
                 }`}
               >
                 {cat}
@@ -133,12 +133,12 @@ export default function FormulasPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Пошук за назвою або формулою…"
-          className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm shadow-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+          className="no-print w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm shadow-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500"
         />
       </div>
 
       {filteredSections.length === 0 ? (
-        <p className="rounded-xl border border-gray-200 bg-white px-5 py-8 text-center text-gray-500 shadow-sm">
+        <p className="rounded-xl border border-gray-200 bg-white px-5 py-8 text-center text-gray-500 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
           Нічого не знайдено.
         </p>
       ) : (

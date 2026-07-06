@@ -1,2 +1,27 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import "katex/dist/katex.min.css";
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark .katex {
+  color: rgb(226 232 240);
+}
+
+.dark .bg-slate-50:has(.katex) {
+  background-color: rgb(15 23 42);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

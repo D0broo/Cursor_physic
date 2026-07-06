@@ -18,6 +18,8 @@ import WaveOpticaTabs from "@/components/WaveOpticaTabs";
 import QuantumOpticaTabs from "@/components/QuantumOpticaTabs";
 import AtomNucleusTabs from "@/components/AtomNucleusTabs";
 import NucleusPhysicsTabs from "@/components/NuclearPhysicsTabs";
+import FavoriteButton from "@/components/FavoriteButton";
+import PrintButton from "@/components/PrintButton";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -41,14 +43,26 @@ export default async function SectionPage({ params }: SectionPageProps) {
     <main className="mx-auto max-w-3xl px-4 py-12">
       <Link
         href="/"
-        className="mb-8 inline-block text-sm text-blue-600 hover:underline"
+        className="no-print mb-8 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
       >
         ← Назад до розділів
       </Link>
 
-      <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
-        {section.title}
-      </h1>
+      <div className="mb-8 flex items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          {section.title}
+        </h1>
+        <div className="no-print flex shrink-0 items-center gap-2">
+          <FavoriteButton
+            favorite={{
+              title: section.title,
+              href: `/physics/${section.slug}`,
+              sectionTitle: section.title,
+            }}
+          />
+          <PrintButton />
+        </div>
+      </div>
 
       {slug === "kinematics" ? (
         <KinematicsTabs />

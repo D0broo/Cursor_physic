@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-100">
           Енциклопедія фізики
         </h1>
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
           Ваш інтерактивний довідник з основних розділів фізики
         </p>
       </header>
@@ -30,13 +30,13 @@ export default function Home() {
           <Link
             key={ref.href}
             href={ref.href}
-            className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
+            className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md dark:border-blue-900 dark:bg-blue-950/50 dark:hover:border-blue-700 dark:hover:bg-blue-900/40"
           >
             <div>
-              <span className="block text-lg font-semibold text-blue-800">
+              <span className="block text-lg font-semibold text-blue-800 dark:text-blue-300">
                 {ref.title}
               </span>
-              <span className="text-sm text-blue-700/80">{ref.desc}</span>
+              <span className="text-sm text-blue-700/80 dark:text-blue-400/80">{ref.desc}</span>
             </div>
             <svg
               className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-hover:translate-x-1"
@@ -58,7 +58,7 @@ export default function Home() {
       <div className="space-y-12">
         {PHYSICS_CATEGORIES.map((category) => (
           <section key={category.title}>
-            <h2 className="mb-6 text-2xl font-bold text-gray-800 border-b pb-2">
+            <h2 className="mb-6 text-2xl font-bold text-gray-800 border-b border-gray-200 pb-2 dark:text-gray-100 dark:border-gray-700">
               {category.title}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -69,10 +69,10 @@ export default function Home() {
                   <Link
                     key={section.slug}
                     href={`/physics/${section.slug}`}
-                    className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:shadow-md"
+                    className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-600 dark:hover:bg-gray-700"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-lg font-medium text-gray-900 group-hover:text-blue-700">
+                      <span className="text-lg font-medium text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-300">
                         {section.title}
                       </span>
                       <svg
