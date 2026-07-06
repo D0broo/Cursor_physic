@@ -48,6 +48,34 @@ export default function ChatWidget() {
   const [submitted, setSubmitted] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const hydratedRef = useRef(false);
+
+  const STORAGE_KEY = "physics-chat-messages";
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw) as ChatMessage[];
+        if (Array.isArray(saved) && saved.length > 0) {
+          setMessages(saved);
+        }
+      }
+    } catch {
+      // ignore
+    }
+    hydratedRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch {
+      // ignore
+    }
+  }, [messages]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -56,25 +84,91 @@ export default function ChatWidget() {
   async function sendChat() {
     const text = input.trim();
     if (!text || loading) return;
-    const nextMessages = [...messages, { role: "user" as const, content: text }];
+    const userMsg: ChatMessage = { role: "user", content: text };
+    const assistantMsg: ChatMessage = { role: "assistant", content: "" };
+    const nextMessages = [...messages, userMsg, assistantMsg];
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
     setError(null);
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages, sectionSlug: activeSlug || null }),
+        body: JSON.stringify({ messages: [...messages, userMsg], sectionSlug: activeSlug || null }),
+        signal: controller.signal,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Помилка запиту");
-      setMessages([...nextMessages, { role: "assistant", content: data.reply }]);
+
+      if (!res.ok) {
+        let errMsg = "Помилка запиту";
+        try {
+          const data = await res.json();
+          errMsg = data.error || errMsg;
+        } catch {
+          // ignore
+        }
+        throw new Error(errMsg);
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error("Стрім недоступний");
+      const decoder = new TextDecoder();
+
+      let acc = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        const current = acc;
+        setMessages((prev) => {
+          const copy = [...prev];
+          copy[copy.length - 1] = { role: "assistant", content: current };
+          return copy;
+        });
+      }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Невідома помилка");
+      if (err instanceof DOMException && err.name === "AbortError") {
+        // keep whatever was streamed so far; remove empty assistant placeholder
+        setMessages((prev) => {
+          if (prev.length && prev[prev.length - 1].role === "assistant" && !prev[prev.length - 1].content) {
+            return prev.slice(0, -1);
+          }
+          return prev;
+        });
+      } else {
+        setError(err instanceof Error ? err.message : "Невідома помилка");
+        // remove empty assistant placeholder on error
+        setMessages((prev) => {
+          if (prev.length && prev[prev.length - 1].role === "assistant" && !prev[prev.length - 1].content) {
+            return prev.slice(0, -1);
+          }
+          return prev;
+        });
+      }
     } finally {
+      abortRef.current = null;
       setLoading(false);
     }
+  }
+
+  function stopChat() {
+    abortRef.current?.abort();
+  }
+
+  function clearChat() {
+    abortRef.current?.abort();
+    setMessages([
+      {
+        role: "assistant",
+        content:
+          "Привіт! Я ШІ-асистент з фізики. Запитай щось або пройди тест по поточному розділу нижче 👇",
+      },
+    ]);
+    setError(null);
   }
 
   async function startQuiz(mode: TestMode) {
@@ -205,6 +299,8 @@ export default function ChatWidget() {
               input={input}
               setInput={setInput}
               sendChat={sendChat}
+              stopChat={stopChat}
+              clearChat={clearChat}
               scrollRef={scrollRef}
               canQuiz={!!activeSlug}
               onQuiz={() => startQuiz("multiple-choice")}
@@ -238,6 +334,8 @@ type ChatViewProps = {
   input: string;
   setInput: (v: string) => void;
   sendChat: () => void;
+  stopChat: () => void;
+  clearChat: () => void;
   scrollRef: React.RefObject<HTMLDivElement | null>;
   canQuiz: boolean;
   onQuiz: () => void;
@@ -252,6 +350,8 @@ function ChatView(props: ChatViewProps) {
     input,
     setInput,
     sendChat,
+    stopChat,
+    clearChat,
     scrollRef,
     canQuiz,
     onQuiz,
@@ -314,6 +414,15 @@ function ChatView(props: ChatViewProps) {
         >
           🧮 Задачі
         </button>
+        <button
+          type="button"
+          onClick={clearChat}
+          disabled={loading || messages.length <= 1}
+          title="Очистити історію чату"
+          className="flex-1 rounded-lg border border-gray-300 bg-white px-2 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+        >
+          🗑 Очистити
+        </button>
       </div>
 
       <div className="border-t border-gray-200 p-3 dark:border-gray-700">
@@ -331,16 +440,29 @@ function ChatView(props: ChatViewProps) {
             placeholder="Запитай щось з фізики…"
             className="max-h-32 flex-1 resize-none rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
           />
-          <button
-            type="button"
-            onClick={sendChat}
-            disabled={loading || !input.trim()}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition-colors hover:bg-blue-700 disabled:opacity-40 dark:bg-blue-500 dark:hover:bg-blue-400"
-          >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19V5M5 12l7-7 7 7" />
-            </svg>
-          </button>
+          {loading ? (
+            <button
+              type="button"
+              onClick={stopChat}
+              title="Зупинити генерацію"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white transition-colors hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-400"
+            >
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={sendChat}
+              disabled={!input.trim()}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white transition-colors hover:bg-blue-700 disabled:opacity-40 dark:bg-blue-500 dark:hover:bg-blue-400"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19V5M5 12l7-7 7 7" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </>

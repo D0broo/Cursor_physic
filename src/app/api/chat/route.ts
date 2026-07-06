@@ -68,10 +68,26 @@ export async function POST(request: Request) {
     }));
 
     const chat = model.startChat({ history });
-    const result = await chat.sendMessage(lastUser.content);
-    const reply = result.response.text();
+    const stream = await chat.sendMessageStream(lastUser.content);
 
-    return NextResponse.json({ reply });
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream<Uint8Array>({
+      async start(controller) {
+        try {
+          for await (const chunk of stream.stream) {
+            const piece = chunk.text();
+            if (piece) controller.enqueue(encoder.encode(piece));
+          }
+          controller.close();
+        } catch (err) {
+          controller.error(err);
+        }
+      },
+    });
+
+    return new Response(readable, {
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Невідома помилка";
     return NextResponse.json({ error: message }, { status: 500 });
