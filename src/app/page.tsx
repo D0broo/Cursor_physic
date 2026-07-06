@@ -1,10 +1,18 @@
 import Link from "next/link";
 import { PHYSICS_CATEGORIES, PHYSICS_SECTIONS } from "@/data/physics-sections";
+import SearchBox from "@/components/SearchBox";
+
+const REFERENCE_LINKS = [
+  { href: "/formules", title: "Усі формули", desc: "Зведений довідник формул усіх розділів" },
+  { href: "/units", title: "Одиниці SI", desc: "Основні та похідні одиниці з виразами" },
+  { href: "/constants", title: "Фізичні сталі", desc: "Універсальні сталі та значення" },
+  { href: "/prefixes", title: "Пристави SI", desc: "Кратні та дольні префікси" },
+];
 
 export default function Home() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
-      <header className="mb-12 text-center">
+      <header className="mb-8 text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
           Енциклопедія фізики
         </h1>
@@ -13,60 +21,38 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="mb-12 grid gap-4 sm:grid-cols-2">
-        <Link
-          href="/formules"
-          className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
-        >
-          <div>
-            <span className="block text-lg font-semibold text-blue-800">
-              Усі формули
-            </span>
-            <span className="text-sm text-blue-700/80">
-              Зведений довідник формул усіх розділів
-            </span>
-          </div>
-          <svg
-            className="h-5 w-5 text-blue-500 transition-transform group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
+      <div className="mb-12">
+        <SearchBox />
+      </div>
 
-        <Link
-          href="/units"
-          className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
-        >
-          <div>
-            <span className="block text-lg font-semibold text-blue-800">
-              Одиниці вимірювання SI
-            </span>
-            <span className="text-sm text-blue-700/80">
-              Основні та похідні одиниці з виразами
-            </span>
-          </div>
-          <svg
-            className="h-5 w-5 text-blue-500 transition-transform group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div className="mb-12 grid gap-4 sm:grid-cols-2">
+        {REFERENCE_LINKS.map((ref) => (
+          <Link
+            key={ref.href}
+            href={ref.href}
+            className="group flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
+            <div>
+              <span className="block text-lg font-semibold text-blue-800">
+                {ref.title}
+              </span>
+              <span className="text-sm text-blue-700/80">{ref.desc}</span>
+            </div>
+            <svg
+              className="h-5 w-5 shrink-0 text-blue-500 transition-transform group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
+        ))}
       </div>
 
       <div className="space-y-12">
@@ -95,11 +81,11 @@ export default function Home() {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >
-                        <path
+                          <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="9 5l7 7-7 7"
+                          d="M9 5l7 7-7 7"
                         />
                       </svg>
                     </div>
