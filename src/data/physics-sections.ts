@@ -25,7 +25,7 @@ export const PHYSICS_SECTIONS: PhysicsSection[] = [
   { slug: "optics-wave", title: "Хвильова оптика" },
   { slug: "quantum-light", title: "Світлові кванти" },
   { slug: "atomic-nucleus", title: "Атом та атомне ядро" },
-  { slug: "nuclear-reactions", title: "Ядерні реакції" },
+  { slug: "nuclear-reactions", title: "Ядерна фізика" },
 ];
 
 export const PHYSICS_CATEGORIES: PhysicsCategory[] = [

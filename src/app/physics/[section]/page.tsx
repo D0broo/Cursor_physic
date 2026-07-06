@@ -16,6 +16,7 @@ import ElectrostaticsTabs from "@/components/ElectrostaticsTabs";
 import GeomOpticaTabs from "@/components/GeomOpticaTabs";
 import WaveOpticaTabs from "@/components/WaveOpticaTabs";
 import QuantumOpticaTabs from "@/components/QuantumOpticaTabs";
+import AtomNucleusTabs from "@/components/AtomNucleusTabs";
 
 type SectionPageProps = {
   params: Promise<{ section: string }>;
@@ -78,6 +79,8 @@ export default async function SectionPage({ params }: SectionPageProps) {
         <WaveOpticaTabs />
       ) : slug === "quantum-light" ? (
         <QuantumOpticaTabs />
+      ) : slug === "atomic-nucleus" ? (
+        <AtomNucleusTabs />
       ) : (
         <p className="text-gray-600">
           Сторінка розділу «{section.title}» — тут з&apos;явиться зміст
