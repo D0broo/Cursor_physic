@@ -1,9 +1,6 @@
-import { NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { getGeminiClient, GEMINI_MODEL } from "@/lib/gemini";
 import { getSectionContext, getSectionTitle } from "@/lib/section-content";
-
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
@@ -18,25 +15,24 @@ const BASE_INSTRUCTION = `Ти — допоміжний ШІ-асистент д
 Пояснюй фізичні поняття зрозуміло, при потребі наводь приклади.
 Якщо питання не стосується фізики — чемно поверни розмову до фізики.`;
 
-export async function POST(request: Request) {
-  let body: RequestBody;
-  try {
-    body = (await request.json()) as RequestBody;
-  } catch {
-    return NextResponse.json({ error: "Невалідний JSON у запиті" }, { status: 400 });
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    res.status(405).json({ error: "Метод не підтримується" });
+    return;
   }
 
+  const body = (req.body ?? {}) as RequestBody;
   const { messages, sectionSlug } = body;
   if (!Array.isArray(messages) || messages.length === 0) {
-    return NextResponse.json({ error: "Поле messages обов'язкове" }, { status: 400 });
+    res.status(400).json({ error: "Поле messages обов'язкове" });
+    return;
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return NextResponse.json(
-      { error: "GEMINI_API_KEY не налаштовано. Додай його у .env.local" },
-      { status: 500 }
-    );
+    res.status(500).json({ error: "GEMINI_API_KEY не налаштовано. Додай його у .env.local" });
+    return;
   }
 
   const sectionContext = getSectionContext(sectionSlug ?? null);
@@ -55,7 +51,8 @@ export async function POST(request: Request) {
 
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
     if (!lastUser) {
-      return NextResponse.json({ error: "Немає повідомлення від користувача" }, { status: 400 });
+      res.status(400).json({ error: "Немає повідомлення від користувача" });
+      return;
     }
 
     const preceding = messages.filter((m) => m !== lastUser);
@@ -70,26 +67,21 @@ export async function POST(request: Request) {
     const chat = model.startChat({ history });
     const stream = await chat.sendMessageStream(lastUser.content);
 
-    const encoder = new TextEncoder();
-    const readable = new ReadableStream<Uint8Array>({
-      async start(controller) {
-        try {
-          for await (const chunk of stream.stream) {
-            const piece = chunk.text();
-            if (piece) controller.enqueue(encoder.encode(piece));
-          }
-          controller.close();
-        } catch (err) {
-          controller.error(err);
-        }
-      },
-    });
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Cache-Control", "no-cache");
+    res.flushHeaders();
 
-    return new Response(readable, {
-      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
-    });
+    const encoder = new TextEncoder();
+    try {
+      for await (const chunk of stream.stream) {
+        const piece = chunk.text();
+        if (piece) res.write(encoder.encode(piece));
+      }
+    } finally {
+      res.end();
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : "Невідома помилка";
-    return NextResponse.json({ error: message }, { status: 500 });
+    res.status(500).json({ error: message });
   }
 }

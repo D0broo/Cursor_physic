@@ -12,6 +12,11 @@ type QuizAnswer = Record<number, number | string>;
 
 const AUTO = "__auto__";
 
+const STATIC_ONLY = process.env.NEXT_PUBLIC_STATIC_ONLY === "true";
+
+const STATIC_NOTICE =
+  "Це статична версія на GitHub Pages — ШІ-асистент і тести тут недоступні. Скористайся розділами довідника.";
+
 function slugFromPath(pathname: string | null): string {
   if (!pathname) return "";
   const m = pathname.match(/^\/physics\/([^/]+)/);
@@ -84,6 +89,10 @@ export default function ChatWidget() {
   async function sendChat() {
     const text = input.trim();
     if (!text || loading) return;
+    if (STATIC_ONLY) {
+      setError(STATIC_NOTICE);
+      return;
+    }
     const userMsg: ChatMessage = { role: "user", content: text };
     const assistantMsg: ChatMessage = { role: "assistant", content: "" };
     const nextMessages = [...messages, userMsg, assistantMsg];
@@ -172,6 +181,10 @@ export default function ChatWidget() {
   }
 
   async function startQuiz(mode: TestMode) {
+    if (STATIC_ONLY) {
+      setQuizError(STATIC_NOTICE);
+      return;
+    }
     if (!activeSlug) {
       setQuizError("Спочатку вибери розділ фізики (зверху у полі «Розділ»).");
       return;
@@ -288,6 +301,11 @@ export default function ChatWidget() {
                 ))}
               </select>
             </label>
+            {STATIC_ONLY && (
+              <p className="mt-2 rounded-md bg-amber-50 px-2 py-1.5 text-[11px] leading-snug text-amber-700 dark:bg-amber-950/40 dark:text-amber-300">
+                Статична версія (GitHub Pages): чат і тести з ШІ недоступні.
+              </p>
+            )}
           </div>
 
           {/* Body */}

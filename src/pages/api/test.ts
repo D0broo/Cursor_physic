@@ -1,11 +1,8 @@
-import { NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { SchemaType, type Schema } from "@google/generative-ai";
 import { getGeminiClient, GEMINI_MODEL } from "@/lib/gemini";
 import { getSectionContext, getSectionTitle, hasSectionData } from "@/lib/section-content";
 import type { TestMode } from "@/lib/test-types";
-
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 type RequestBody = {
   mode: TestMode;
@@ -54,29 +51,25 @@ const NUMERIC_SCHEMA: Schema = {
   required: ["problems"],
 };
 
-export async function POST(request: Request) {
-  let body: RequestBody;
-  try {
-    body = (await request.json()) as RequestBody;
-  } catch {
-    return NextResponse.json({ error: "Невалідний JSON у запиті" }, { status: 400 });
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    res.status(405).json({ error: "Метод не підтримується" });
+    return;
   }
 
+  const body = (req.body ?? {}) as RequestBody;
   const mode: TestMode = body.mode === "numeric" ? "numeric" : "multiple-choice";
   const sectionSlug = body.sectionSlug ?? null;
 
   if (!sectionSlug || !hasSectionData(sectionSlug)) {
-    return NextResponse.json(
-      { error: "Вкажіть коректний sectionSlug розділу довідника" },
-      { status: 400 }
-    );
+    res.status(400).json({ error: "Вкажіть коректний sectionSlug розділу довідника" });
+    return;
   }
 
   if (!process.env.GEMINI_API_KEY) {
-    return NextResponse.json(
-      { error: "GEMINI_API_KEY не налаштовано. Додай його у .env.local" },
-      { status: 500 }
-    );
+    res.status(500).json({ error: "GEMINI_API_KEY не налаштовано. Додай його у .env.local" });
+    return;
   }
 
   const context = getSectionContext(sectionSlug);
@@ -125,15 +118,16 @@ ${context}`;
     const parsed = JSON.parse(text) as Record<string, unknown>;
 
     if (mode === "multiple-choice") {
-      return NextResponse.json({
+      res.status(200).json({
         mode: "multiple-choice",
         sectionSlug,
         sectionTitle,
         questions: parsed.questions ?? [],
       });
+      return;
     }
 
-    return NextResponse.json({
+    res.status(200).json({
       mode: "numeric",
       sectionSlug,
       sectionTitle,
@@ -141,6 +135,6 @@ ${context}`;
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Невідома помилка";
-    return NextResponse.json({ error: message }, { status: 500 });
+    res.status(500).json({ error: message });
   }
 }

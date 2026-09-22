@@ -7,6 +7,7 @@ import {
     conservationsData,
     type ConservationsTabId,
 } from "@/data/conservationLawsData";
+import { BASE_PATH } from "@/lib/base-path";
 
 function FormulaBlock({ latex }: { latex: string }) {
     return (
@@ -58,7 +59,7 @@ function LawsPanel() {
             )}
             {law.imageFile && (
               <img
-                src={`/images/${law.imageFile}`} // <-- Використовуємо imageFile
+                src={`${BASE_PATH}/images/${law.imageFile}`} // <-- Використовуємо imageFile
                 alt={law.title}
                 className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
               />

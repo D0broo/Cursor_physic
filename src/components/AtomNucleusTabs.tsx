@@ -7,6 +7,7 @@ import {
     atomNucleusData,
     type AtomNucleusTabId,
 } from "@/data/atomNucleusData";
+import { BASE_PATH } from "@/lib/base-path";
 
 function FormulaBlock({ latex }: { latex: string }) {
     return (
@@ -48,7 +49,7 @@ function TheoryPanel() {
                   )}
                   {item.imageFile && (
                     <img
-                      src={`/images/${item.imageFile}`} // <-- Використовуємо imageFile
+                      src={`${BASE_PATH}/images/${item.imageFile}`} // <-- Використовуємо imageFile
                       alt={item.term}
                       className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
                     />
@@ -84,7 +85,7 @@ function LawsPanel() {
             )}
             {law.imageFile && (
               <img
-                src={`/images/${law.imageFile}`} // <-- Використовуємо imageFile
+                src={`${BASE_PATH}/images/${law.imageFile}`} // <-- Використовуємо imageFile
                 alt={law.title}
                 className="mt-3 h-40 w-full rounded-lg object-contain bg-slate-50"
               />
